@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "955499844674",
+    "project_id": "sgl-app-30967",
+    "storage_bucket": "sgl-app-30967.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955499844674:android:94391dc420910f8f4009db",
+        "android_client_info": {
+          "package_name": "com.example.score_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIVNMUUgYNixYssVHd-CiobpXCqtE0ano"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955499844674:android:34e0731b03ad803a4009db",
+        "android_client_info": {
+          "package_name": "com.example.sgl_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIVNMUUgYNixYssVHd-CiobpXCqtE0ano"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
