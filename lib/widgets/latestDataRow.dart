@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../constants/constants.dart';
 
@@ -16,6 +17,9 @@ class _UpdatedRowState extends State<UpdatedRow> {
       TextStyle(fontWeight: FontWeight.bold, color: darkGreen, fontSize: 32);
   @override
   Widget build(BuildContext context) {
+    DateTime currentDate = DateTime.now();
+    final DateFormat _dateFormat = DateFormat('dd-MM-yyyy');
+    String formatedDate = _dateFormat.format(currentDate).toString();
     return StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection('scores')
@@ -27,6 +31,7 @@ class _UpdatedRowState extends State<UpdatedRow> {
               child: Text('loading...'),
             );
           }
+
           var latestData = snapshot.data?['latest'];
           var updatedA = latestData['A'];
           var updatedB = latestData['B'];
@@ -39,6 +44,10 @@ class _UpdatedRowState extends State<UpdatedRow> {
             updatedB,
             updatedC,
           ];
+
+          if (formatedDate != updatedDate) {
+            return const SizedBox();
+          }
 
           return Padding(
             padding: const EdgeInsets.only(right: 30.0, left: 30),

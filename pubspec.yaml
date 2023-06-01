@@ -42,6 +42,9 @@ dependencies:
   cloud_firestore: ^4.7.1
   firebase_core: ^2.13.0
   get: ^4.6.5
+  firebase_messaging: ^14.6.2
+  flutter_local_notifications: ^14.1.0
+  timezone:
   
 
 dev_dependencies:

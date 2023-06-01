@@ -1,50 +1,56 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:score_app/widgets/preDataRow.dart';
 
 import '../backend/database.dart';
 import '../constants/constants.dart';
 
 class DoublePreDataList extends StatefulWidget {
-  const DoublePreDataList({super.key});
+  DateTime selectedDate;
+  DoublePreDataList({super.key, required this.selectedDate});
 
   @override
-  State<DoublePreDataList> createState() => _DoublePreDataListListState();
+  State<DoublePreDataList> createState() => _DoublePreDataListState();
 }
 
-class _DoublePreDataListListState extends State<DoublePreDataList> {
+class _DoublePreDataListState extends State<DoublePreDataList> {
   List<Map<String, dynamic>> arrayData = [];
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<void> getSingleData() async {
-    CollectionReference collectionRef = firestore.collection('scores');
-
-    try {
-      DocumentSnapshot documentSnapshot =
-          await collectionRef.doc('double').get();
+  void fetchScores(DateTime? selectedDate) {
+    final DateFormat _dateFormat = DateFormat('dd-MM-yyyy');
+    String defaultDate = _dateFormat.format(widget.selectedDate).toString();
+    FirebaseFirestore.instance
+        .collection('scores')
+        .doc('double')
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        Map<String, dynamic>? documentData =
-            documentSnapshot.data() as Map<String, dynamic>?;
-        if (documentData != null) {
+        List<Map<String, dynamic>> allData =
+            List<Map<String, dynamic>>.from(documentSnapshot.get('preData'));
+
+        if (widget.selectedDate != null) {
           setState(() {
             arrayData =
-                List<Map<String, dynamic>>.from(documentData['preData']);
+                allData.where((data) => data['Date'] == defaultDate).toList();
           });
-
-          // Use the arrayData as needed
+        } else {
+          Fluttertoast.showToast(msg: 'Please select date');
         }
       }
-    } catch (e) {
-      print('error');
-    }
+    }).catchError((error) {
+      print('Error fetching scores: $error');
+    });
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getSingleData();
+    fetchScores(widget.selectedDate);
   }
 
   @override
