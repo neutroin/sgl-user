@@ -279,7 +279,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   PopupMenuItem<String>(
                     value: 'ON',
                     child: RadioListTile(
-                      title: const Text('Notification ON'),
+                      title: Text(
+                        'Notification ON',
+                        style: TextStyle(color: Colors.green.shade600),
+                      ),
                       value: 'ON',
                       groupValue: _selectedOption,
                       onChanged: (value) {
@@ -298,7 +301,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   PopupMenuItem<String>(
                     value: 'OFF',
                     child: RadioListTile(
-                      title: const Text('Notification OFF'),
+                      title: Text(
+                        'Notification OFF',
+                        style: TextStyle(color: Colors.red.shade700),
+                      ),
                       value: 'OFF',
                       groupValue: _selectedOption,
                       onChanged: (value) {
